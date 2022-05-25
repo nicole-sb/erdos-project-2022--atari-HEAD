@@ -35,7 +35,7 @@ def ensure_directory(dir_name):
 def add_trial_column(filepath, game):
     # use the name of the file to get the trial id
     # add trial identifier to df before combining
-    file_df = pd.read_csv(os.path.join("cleaned_data", game, filepath))
+    file_df = pd.read_csv(os.path.join("cleaned_data/raw_data", game, filepath))
     splits = filepath.split("_")
     iden = "_".join(splits[0:3])
     file_df["trial_id"] = iden
@@ -44,10 +44,12 @@ def add_trial_column(filepath, game):
 
 def combine_trial_files(game):
     files = [
-        f for f in os.listdir(os.path.join("cleaned_data", game)) if f.endswith(".txt")
+        f
+        for f in os.listdir(os.path.join("cleaned_data/raw_data", game))
+        if f.endswith(".txt")
     ]
     full_df = pd.concat([add_trial_column(f, game) for f in files])
-    dest_path = os.path.join("cleaned_data", game, "combined.csv")
+    dest_path = os.path.join("cleaned_data/raw_data", game, "combined.csv")
     full_df.to_csv(dest_path, index=False)
     logger.info(f"combined dataframe written to {dest_path}")
     return dest_path
@@ -136,10 +138,9 @@ def clean_data_file(fp, target_dir, game):
 
         try:
             head, tail = os.path.split(fp)
-            _, head_tail = os.path.split(head)
-            dir_folder = os.path.join(target_dir, head_tail)
+            dir_folder = os.path.join(target_dir, head)
 
-            if game == "ms_pacman":
+            if game == "highscore":
                 clean_ms_pacman(df)
 
             ensure_directory(dir_folder)
@@ -158,17 +159,15 @@ def clean_data_file(fp, target_dir, game):
 
 
 def clean_all_raw_data(source_dir, target_dir, game):
-    dirs = [
-        os.path.join(source_dir, d)
-        for d in os.listdir(source_dir)
-        if os.path.isdir(os.path.join(source_dir, d))
+    files = [
+        os.path.join(source_dir, game, f)
+        for f in os.listdir(os.path.join(source_dir, game))
+        if f.endswith(".txt")
     ]
 
-    for one_dir in dirs:
-        files = [f for f in os.listdir(one_dir) if f.endswith(".txt")]
-        for one_file in files:
-            filepath = os.path.join(one_dir, one_file)
-            clean_data_file(filepath, target_dir, game)
+    for one_file in files:
+        filepath = one_file
+        clean_data_file(filepath, target_dir, game)
 
     combined_fp = combine_trial_files(game)
 
