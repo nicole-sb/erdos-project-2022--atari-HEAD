@@ -2,10 +2,13 @@ from csv import reader
 
 import matplotlib.pyplot as plt
 import numpy as np
+from seaborn import set_style
 from sklearn.decomposition import PCA
 
 
 def plot_feature_images(X, X_tilde, pca, image_shape):
+    set_style("white")
+
     plt.show()
     fig, ax = plt.subplots(
         1, 7, figsize=(20, 15), subplot_kw={"xticks": (), "yticks": ()}
