@@ -1,3 +1,10 @@
+# FILES TOO BIG
+# ZIP INSTEAD AND COMMIT THE ZIP
+/final_data/ms_pacman/highscore/combined_trial_data.csv
+/final_data/ms_pacman/highscore/ravelled_image_data.csv
+
+.ipynb.checkpoints/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,3 +134,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# OS generated files #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
