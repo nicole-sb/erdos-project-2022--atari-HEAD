@@ -6,6 +6,21 @@ from seaborn import set_style
 from sklearn.decomposition import PCA
 
 
+def save_pca_images(n_components, filepath):
+
+    rows = get_rows_array(filepath)
+
+    X = rows
+    X = X / 255
+
+    pca = PCA(n_components=n_components)
+    pca.fit(X)
+    X_tilde = pca.transform(X)
+
+    image_shape = (210, 160)
+    X_tilde[0, :].dot(pca.components_).reshape(image_shape)
+
+
 def plot_feature_images(X, X_tilde, pca, image_shape):
     set_style("white")
 
