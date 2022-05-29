@@ -16,6 +16,7 @@ import pandas as pd
 def ravel_images(parent_dir: str, final_dir: str):
     photos = [p for p in os.listdir(parent_dir) if p.endswith(".png")]
     lines = []
+    ids = []
 
     for photo in photos:
         img = cv2.cvtColor(
@@ -23,11 +24,14 @@ def ravel_images(parent_dir: str, final_dir: str):
             cv2.COLOR_BGR2GRAY,
         )
         ravelled = img.ravel()
+        id, _ = photo.split(".")
+        ids.append(id)
         lines.append(ravelled)
 
     with open(os.path.join(final_dir, "ravelled_image_data.csv"), "w") as file:
-        for line in lines:
-            file.write(",".join(str(x) for x in line))
+        for i in range(0, len(lines)):
+            file.write(ids[i] + ",")
+            file.write(",".join(str(x) for x in lines[i]))
             file.write("\n")
 
 
@@ -83,6 +87,21 @@ def combine_clean_files(
 def clean_ms_pacman(df):
     # episode id isn't applicable for ms pacman, always 0
     df.drop("episode_id", axis=1, inplace=True)
+
+    # scale gaze positions to the pixel ranges
+    def scale_x(x):
+        x = x + 34.55
+        x = x / 1.896
+        return x
+
+    def scale_y(y):
+        y = y + 55.85
+        y = y / 1.863
+        return -y
+
+    df["gaze_position_x"] = df["gaze_position_x"].apply(lambda row: scale_x(float(row)))
+    df["gaze_position_y"] = df["gaze_position_y"].apply(lambda row: scale_y(float(row)))
+
     return df
 
 
