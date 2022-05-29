@@ -1,3 +1,4 @@
+# import os
 from csv import reader
 
 import matplotlib.pyplot as plt
@@ -6,19 +7,26 @@ from seaborn import set_style
 from sklearn.decomposition import PCA
 
 
-def save_pca_images(n_components, filepath):
+def save_pca_images(n_components, read_filepath, write_filepath):
 
-    rows = get_rows_array(filepath)
+    rows, img_ids = get_rows_array(read_filepath)
+    rows = get_sample(rows, 10000)
 
     X = rows
     X = X / 255
 
     pca = PCA(n_components=n_components)
     pca.fit(X)
-    X_tilde = pca.transform(X)
+    X_tilde = pca.transform(rows)
 
-    image_shape = (210, 160)
-    X_tilde[0, :].dot(pca.components_).reshape(image_shape)
+    # image_shape = (210, 160)
+
+    with open(write_filepath, "w") as file:
+        for i in range(0, len(X_tilde)):
+            # pca_d = X_tilde[i, :].dot(pca.components_)
+            file.write(img_ids[i] + ",")
+            file.write(",".join(str(x) for x in X_tilde[i]))
+            file.write("\n")
 
 
 def plot_feature_images(X, X_tilde, pca, image_shape):
@@ -86,17 +94,19 @@ def get_rows_array(filepath):
     with open(filepath) as obj:
         csv_reader = reader(obj)
         rows_list = []
+        img_ids = []
         for row in csv_reader:
-            rr = np.array([int(r) for r in row])
+            img_ids.append(row[0])
+            rr = np.array([int(r) for r in row[1:]])
             rows_list.append(rr)
 
     rows = np.array(rows_list)
-    return rows
+    return rows, img_ids
 
 
 def perform_PCA(filepath):
 
-    rows = get_rows_array(filepath)
+    rows, img_ids = get_rows_array(filepath)
 
     rows = get_sample(rows, sample_n=10000)
 
