@@ -1,13 +1,12 @@
 import os
 
-
 import numpy as np
 import pandas as pd
 import streamlit as st
 from PIL import Image
 from streamlit_drawable_canvas import st_canvas
 
-from model import get_model_response, get_photo_information, train_model
+from utils.model import get_model_response, get_photo_information, train_model
 
 st.set_page_config(
     page_title="Atari-HEAD",
@@ -22,7 +21,7 @@ st.set_page_config(
 
 @st.cache
 def get_random_photo():
-    dir = "../final_data/ms_pacman/highscore/frames"
+    dir = "final_data/ms_pacman/highscore/frames"
     photos = os.listdir(dir)
     max = len(photos) - 1
     rand_int = np.random.randint(low=0, high=max)
