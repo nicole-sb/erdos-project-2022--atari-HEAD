@@ -12,9 +12,9 @@ Regular trials were set to a 15-minute timeframe; highscore trials allowed the p
 This project will use the game frame images along with associated gaze positions to model the best resulting action. We focused on the Ms. Pacman game and specifically the `highscore` trials, largely for time and computational reasons. However, much of the modeling included in this repo would apply for other games and trials as well.
 
 ## Project Goals & Applications
-**Problem:** It is difficult to design video games that are adaptable to players. Artificial intelligence (AI) in games are set to have specific behaviors using algorithms that are predictable by players. This leads to decreases in player engagement because players can anticipate in-game events.
+**Problem:** It is a difficult task to get information on players decision making process in video games. Most information on this subject is limited to players’ inputs into their controllers and speculations. One can only make an educated guess on what players were thinking about before making inputs.
 
-**Solution:** Team Apollo created a model that utilizes a player’s gaze positions and information from video game frames to predict their actions before they are made. This information on human decision-making can be used to create a more adaptable and dynamic video game experience to increase player engagement.
+**Solution:** Team Apollo created a model that utilizes a player’s gaze positions and information from video game frames to predict their actions before they are made. This information on quantitative data on players’ decision making process.
 
 **Stakeholders:** Our stakeholders can be divided into two categories. A primary stakeholder that is directly affected by our model are game developers. Secondary stakeholders that would have an interest in our model are hardware and software companies for eye-trackers and virtual reality, and gamers.
 
