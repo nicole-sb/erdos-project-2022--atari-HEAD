@@ -17,3 +17,21 @@ This project will use the game frame images along with associated gaze positions
 **Solution:** Team Apollo created a model that utilizes a player’s gaze positions and information from video game frames to predict their actions before they are made. This information on human decision-making can be used to create a more adaptable and dynamic video game experience to increase player engagement.
 
 **Stakeholders:** Our stakeholders can be divided into two categories. A primary stakeholder that is directly affected by our model are game developers. Secondary stakeholders that would have an interest in our model are hardware and software companies for eye-trackers and virtual reality, and gamers.
+
+# Modeling Method
+A multi-layer perceptron (MLP) was trained using 80% of data extracted from each frame during a high-score 2-hour playthrough of Ms. Pac-Man from the Atari Human Eye-Tracking and Demonstration dataset. The trained MLP was then tested with the remaining 20% of the data. The model yielded an accuracy of 73% on the test data. This process can be found in the `Data_prediction` folder of this repository.
+
+# In this repository
+The `Data_handling` folder includes a notebook that walks through some feature extraction for the game play images we use in this project, as well as some supplementary files for this notebook.
+
+The `Data_prediction` folder includes a notebook that walks through our modeling process (explained above in the Modeling Method section), as well as some supplementary files for this notebook.
+
+`final_data/ms_pacman/highscore/frames` includes all the game play images used in this project, sourced from the original dataset (Zhang et al.).
+
+The code for our Streamlit app can be found under `utils/run_app.py.`
+
+
+# Appendix
+**Citations:**
+
+Ruohan Zhang, Calen Walshe, Zhuode Liu, Lin Guan, Karl S. Muller, Jake A. Whritner, Luxin Zhang, Mary Hayhoe, & Dana Ballard. (2019). Atari-HEAD: Atari Human Eye-Tracking and Demonstration Dataset (Version 4) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.3451402
