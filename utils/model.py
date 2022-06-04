@@ -16,7 +16,7 @@ def get_model_response(model, X):
 
 def train_model():
 
-    train = pd.read_csv("../Data_handling/finaldf.csv")
+    train = pd.read_csv("~/Data_handling/finaldf.csv")
 
     X = train.drop(["action"], axis=1).copy()
     y = train["action"]
