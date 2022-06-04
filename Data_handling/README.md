@@ -1,5 +1,5 @@
 # Data handling
-The Jupyternote follows the following steps:
+The Jupyternote follows the following steps on the dataset: 593_RZ_5037271_Aug-05-15-35-12.csv
 1. For gaze positions, find start position, end position, use pca to find mean position, variances, and components(components are transformed to angles)
 2. Calculate the angle and amplitude of (mean,start,end) gaze position relative to pac_man position in each frame.
 3. In each image, find the position of pac_man, nex possible actions. And find the nearest ghost position.
