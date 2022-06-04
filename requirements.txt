@@ -1,0 +1,3 @@
+opencv-python-headless
+sklearn
+streamlit_drawable_canvas

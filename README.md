@@ -28,7 +28,7 @@ The `Data_prediction` folder includes a notebook that walks through our modeling
 
 `final_data/ms_pacman/highscore/frames` includes all the game play images used in this project, sourced from the original dataset (Zhang et al.).
 
-The code for our Streamlit app can be found under `run_app.py.` Some utilities the app uses are found under `utils/`.
+The code for our Streamlit app can be found under `run_app.py.` Some utilities the app uses are found under `utils/`. Unfortunately, the deployed app does not function due to an [unresolved import issue](https://discuss.streamlit.io/t/cannot-see-streamlit-drawable-canvas/6235) with a custom package used in the app. The app can be run locally if the user clones the repo, installs the packages found in requirements.txt, and runs `streamlit run run_app.py'.
 
 
 # Appendix
